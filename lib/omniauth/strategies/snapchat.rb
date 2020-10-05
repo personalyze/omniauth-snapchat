@@ -10,7 +10,7 @@ module OmniAuth
       option :client_options, {
         site: 'https://adsapi.snapchat.com',
         authorize_url: 'https://accounts.snapchat.com/login/oauth2/authorize',
-        token_url: 'https://accounts.snapchat.com/accounts/oauth2/token'
+        token_url: 'https://accounts.snapchat.com/login/oauth2/access_token'
       }
 
       uid { raw_info['me']['id'] }
@@ -36,7 +36,7 @@ module OmniAuth
       end
 
       def callback_url
-        full_host + script_name + callback_path
+        options[:redirect_uri] || full_host + script_name + callback_path
       end
 
       def token_params
